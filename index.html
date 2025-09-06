@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Green Earth</title>
+  <!-- tailwind + daisy ui cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
+
 <body>
-  
+  <header class="py-6 bg-[#15803d]">
+    <!-- nav -->
+    <nav class="flex justify-between items-center w-11/12 mx-auto">
+      <div>
+        <a href="">
+          <h3 class="text-white text-xl font-semibold">Green Earth</h3>
+        </a>
+      </div>
+      <div class="flex gap-6 font-medium text-white">
+        <a href="">About</a>
+        <a href="">Gallery</a>
+        <a href="">Plant a Tree</a>
+      </div>
+      <div>
+        <button class="font-medium text-[#15803D] py-3 px-5 bg-[#facc15] rounded-full cursor-pointer">Plant a
+          Tree</button>
+      </div>
+    </nav>
+  </header>
 </body>
+
 </html>
