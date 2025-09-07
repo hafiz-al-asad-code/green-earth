@@ -1,3 +1,4 @@
+// function for load categories section
 const loadCategories = () => {
   const url = "https://openapi.programming-hero.com/api/categories";
   fetch(url)
@@ -7,6 +8,7 @@ const loadCategories = () => {
     })
 }
 
+// function for display categories section
 const displayCategories = (categories) => {
   // get the parent
   const categoryContainer = document.getElementById('category-container');
@@ -14,12 +16,55 @@ const displayCategories = (categories) => {
   categories.forEach(category => {
     // create an element
     const p = document.createElement('p');
-    p.className = "py-2 px-[10px] rounded-[4px] hover:bg-[#15803D] hover:text-white cursor-pointer";
+    p.className = `category-name-plate-${category.id} py-2 px-[10px] rounded-[4px] hover:bg-[#15803D] hover:text-white cursor-pointer`;
     p.innerText = `${category.category_name}`;
 
     // append the element to the parent
     categoryContainer.appendChild(p);
+
+    loadTreeCards(`${category.id}`);
   })
 }
+
+// function for load tree cards
+const loadTreeCards = (id) => {
+  const url = `https://openapi.programming-hero.com/api/category/${id}`;
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const categoryContainer = document.getElementById('category-container');
+      categoryContainer.addEventListener('click', function (event) {
+        if (event.target.classList.contains(`category-name-plate-${id}`)) {
+          displayTreeCards(data.plants);
+        }
+      })
+    })
+}
+
+// function for display tree cards
+const displayTreeCards = (cards) => {
+  const cardsContainer = document.getElementById('cards-container');
+  cardsContainer.innerHTML = "";
+
+  cards.forEach(card => {
+    const div = document.createElement('div');
+    div.className = "p-4 bg-white rounded-lg";
+
+    div.innerHTML = `
+      <img src="${card.image}" alt="">
+            <h3 class="text-[14px] font-semibold mt-3">${card.name}</h3>
+            <p class="text-[12px] text-[#1F2937] my-2">${card.description}</p>
+            <div class="flex justify-between items-center mb-3">
+              <div class="py-1 px-3 bg-[#dcfce7] rounded-[400px]">
+                <p class="text-[14px] text-[#15803d]">${card.category}</p>
+              </div>
+              <p class="text-[14px] font-semibold">৳<span>${card.price}</span></p>
+            </div>
+            <button class="py-3 px-5 font-medium text-white bg-[#15803D] rounded-full w-full">Add to Cart</button>
+    `
+    cardsContainer.appendChild(div);
+  })
+}
+
 
 loadCategories();
