@@ -86,19 +86,25 @@ const displayTreeCards = (cards) => {
 
   cards.forEach(card => {
     const div = document.createElement('div');
-    div.className = "p-4 bg-white rounded-lg shadow-sm";
+    div.className = "p-4 bg-white rounded-lg shadow-sm flex flex-col justify-between";
 
     div.innerHTML = `
-            <img class="rounded-lg" src="${card.image}" alt="">
-            <h3 onclick="loadModal(${card.id})" class="card-name-${card.id} text-[14px] font-semibold mt-3">${card.name}</h3>
-            <p class="text-[12px] text-[#1F2937] my-2">${card.description}</p>
-            <div class="flex justify-between items-center mb-3">
-              <div class="py-1 px-3 bg-[#dcfce7] rounded-[400px]">
-                <p class="text-[14px] text-[#15803d]">${card.category}</p>
+            <div>
+              <img class="rounded-lg h-[300px] w-full" src="${card.image}" alt="">
+              <h3 onclick="loadModal(${card.id})" class="card-name-${card.id} text-[14px] font-semibold mt-3">${card.name}</h3>
+              <p class="text-[12px] text-[#1F2937] my-2">${card.description}</p>
+              <div class="flex justify-between items-center mb-3">
+                <div class="py-1 px-3 bg-[#dcfce7] rounded-[400px]">
+                  <p class="text-[14px] text-[#15803d]">${card.category}</p>
+                </div>
+                <p class="text-[14px] font-semibold">৳<span>${card.price}</span></p>
               </div>
-              <p class="text-[14px] font-semibold">৳<span>${card.price}</span></p>
             </div>
-            <button onclick="loadCartBtn(${card.id})" class="cart-btn-${card.id} py-3 px-5 font-medium text-white bg-[#15803D] rounded-full w-full">Add to Cart</button>
+
+            <div>
+              <button onclick="loadCartBtn(${card.id})" class="cart-btn-${card.id} py-3 px-5 font-medium text-white bg-[#15803D] rounded-full w-full">Add to Cart</button>
+            </div>
+            
     `
     cardsContainer.appendChild(div);
   })
@@ -121,7 +127,7 @@ const displayModal = (plantsDetails) => {
 
   cardDetailsContainer.innerHTML = `
           <h1 class="text-2xl font-bold">${plantsDetails.name}</h1>
-          <img src="${plantsDetails.image}" alt="">
+          <img class="h-[300px] w-full" src="${plantsDetails.image}" alt="">
           <p><span class="font-bold">Category:</span> ${plantsDetails.category}</p>
           <p><span class="font-bold">Price:</span> ৳${plantsDetails.price}</p>
           <p><span class="font-bold">Description:</span> ${plantsDetails.description}</p>
