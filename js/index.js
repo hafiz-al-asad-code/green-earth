@@ -156,6 +156,8 @@ const loadCartBtn = (id) => {
 }
 
 const displayCart = (cartDetails) => {
+  alert(`${cartDetails.name} has been added to the cart.`);
+
   const cartCardsContainer = document.getElementById('cart-cards-container');
   cartCardsContainer.innerHTML += `
     <div id="cartParent-${cartDetails.id}" class="bg-[#f0fdf4] py-2 px-3 rounded-lg">
