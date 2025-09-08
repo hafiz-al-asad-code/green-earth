@@ -29,25 +29,54 @@ const displayCategories = (categories) => {
 }
 
 // function for load tree cards
+// const loadTreeCards = (id) => {
+
+//   const url = `https://openapi.programming-hero.com/api/category/${id}`;
+//   fetch(url)
+//     .then(res => res.json())
+//     .then(data => {
+//       const categoryContainer = document.getElementById('category-container');
+//       categoryContainer.addEventListener('click', function (event) {
+//         if (event.target.classList.contains(`category-name-plate-${id}`)) {
+//           const commonP = document.querySelectorAll('.common-p');
+//           commonP.forEach(p => {
+//             p.classList.remove('bg-[#15803D]', 'text-white');
+//           })
+
+//           event.target.classList.add("bg-[#15803D]", "text-white");
+//           displayTreeCards(data.plants);
+//         }
+//       })
+//     })
+// }
+
 const loadTreeCards = (id) => {
-  const url = `https://openapi.programming-hero.com/api/category/${id}`;
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      const categoryContainer = document.getElementById('category-container');
-      categoryContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains(`category-name-plate-${id}`)) {
-          const commonP = document.querySelectorAll('.common-p');
 
-          commonP.forEach(p => {
-            p.classList.remove('bg-[#15803D]', 'text-white');
-          })
-
-          event.target.classList.add("bg-[#15803D]", "text-white");
-          displayTreeCards(data.plants);
-        }
+  // const url = `https://openapi.programming-hero.com/api/category/${id}`;
+  // fetch(url)
+  //   .then(res => res.json())
+  //   .then(data => {
+  const categoryContainer = document.getElementById('category-container');
+  categoryContainer.addEventListener('click', function (event) {
+    if (event.target.classList.contains(`category-name-plate-${id}`)) {
+      manageSpinner(true);
+      const commonP = document.querySelectorAll('.common-p');
+      commonP.forEach(p => {
+        p.classList.remove('bg-[#15803D]', 'text-white');
       })
-    })
+
+      event.target.classList.add("bg-[#15803D]", "text-white");
+
+      const url = `https://openapi.programming-hero.com/api/category/${id}`;
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          displayTreeCards(data.plants);
+        })
+    }
+  })
+  // })
 }
 
 // function for display tree cards
@@ -73,6 +102,7 @@ const displayTreeCards = (cards) => {
     `
     cardsContainer.appendChild(div);
   })
+  manageSpinner(false);
 }
 
 // function for load modal data
@@ -101,6 +131,7 @@ const displayModal = (plantsDetails) => {
 
 // function for display all tree cards
 const allTreeCards = () => {
+  manageSpinner(true);
   const url = "https://openapi.programming-hero.com/api/plants";
   fetch(url)
     .then(res => res.json())
@@ -146,7 +177,6 @@ const displayCart = (cartDetails) => {
   document.getElementById('total-amount').innerText = totalAmountNumber;
 }
 
-
 const loadPriceDeduct = (id) => {
   const cartCardsContainer = document.getElementById('cart-cards-container');
 
@@ -172,6 +202,19 @@ const loadPriceDeduct = (id) => {
   //  cartList = cartList.find(item => Number(item.id) !== id);
 }
 
+// function for managing the spinner
+const manageSpinner = (value) => {
+  const cardsContainer = document.getElementById('cards-container');
+  const spinner = document.getElementById('spinner');
+  if (value === true) {
+    cardsContainer.classList.add('hidden');
+    spinner.classList.remove('hidden');
+  }
+  else {
+    cardsContainer.classList.remove('hidden');
+    spinner.classList.add('hidden');
+  }
+}
 
 allTreeCards();
 
