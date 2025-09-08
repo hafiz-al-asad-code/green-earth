@@ -9,9 +9,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <!-- tailwind + daisy ui cdn -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Inter font link -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+    * {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
 </head>
 
 <body class="bg-[#f0fdf4]">
@@ -68,7 +78,7 @@
         <p class="text-[#1f2937] mb-6 mt-2">Join our mission to plant 1 million trees and make the Earth greener for
           future
           generations.</p>
-        <button class="py-3 px-5 rounded-full bg-[#FACC15]">Get Involved</button>
+        <button class="py-3 px-5 rounded-full bg-[#FACC15] cursor-pointer">Get Involved</button>
       </div>
       <!-- right side -->
       <div>
@@ -204,7 +214,9 @@
           <option value="">Mehogoni</option>
           <option value="">Bonsai</option>
         </select>
-        <button class="w-full py-3 p-3 bg-[#facc15] text-[#15803d] font-medium rounded-full">Donate Now</button>
+        <button id="donate-btn"
+          class="w-full py-3 p-3 bg-[#facc15] text-[#15803d] font-medium rounded-full cursor-pointer">Donate
+          Now</button>
       </form>
     </section>
   </main>

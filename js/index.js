@@ -91,7 +91,7 @@ const displayTreeCards = (cards) => {
     div.innerHTML = `
             <div>
               <img class="rounded-lg h-[300px] w-full" src="${card.image}" alt="">
-              <h3 onclick="loadModal(${card.id})" class="card-name-${card.id} text-[14px] font-semibold mt-3">${card.name}</h3>
+              <span onclick="loadModal(${card.id})" class="card-name-${card.id} text-[14px] font-semibold mt-3 cursor-pointer">${card.name}</span>
               <p class="text-[12px] text-[#1F2937] my-2">${card.description}</p>
               <div class="flex justify-between items-center mb-3">
                 <div class="py-1 px-3 bg-[#dcfce7] rounded-[400px]">
@@ -102,7 +102,7 @@ const displayTreeCards = (cards) => {
             </div>
 
             <div>
-              <button onclick="loadCartBtn(${card.id})" class="cart-btn-${card.id} py-3 px-5 font-medium text-white bg-[#15803D] rounded-full w-full">Add to Cart</button>
+              <button onclick="loadCartBtn(${card.id})" class="cart-btn-${card.id} py-3 px-5 font-medium text-white bg-[#15803D] rounded-full w-full cursor-pointer">Add to Cart</button>
             </div>
             
     `
@@ -166,7 +166,7 @@ const displayCart = (cartDetails) => {
                   <h3 class="text-[14px] font-semibold">${cartDetails.name}</h3>
                   <p class="text-[#8b9798]">৳<span>${cartDetails.price}</span></p>
                 </div>
-                <i id="${cartDetails.id}" onclick="loadPriceDeduct(${cartDetails.id})" class="delete-btn-${cartDetails.id} fa-solid fa-xmark"></i>
+                <i id="${cartDetails.id}" onclick="loadPriceDeduct(${cartDetails.id})" class="delete-btn-${cartDetails.id} fa-solid fa-xmark cursor-pointer"></i>
               </div>
             </div>
   `
@@ -223,6 +223,7 @@ const manageSpinner = (value) => {
     spinner.classList.add('hidden');
   }
 }
+
 
 allTreeCards();
 
