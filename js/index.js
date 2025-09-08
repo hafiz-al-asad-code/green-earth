@@ -1,3 +1,5 @@
+let cartList = [];
+
 // function for load categories section
 const loadCategories = () => {
   const url = "https://openapi.programming-hero.com/api/categories";
@@ -67,7 +69,7 @@ const displayTreeCards = (cards) => {
               </div>
               <p class="text-[14px] font-semibold">৳<span>${card.price}</span></p>
             </div>
-            <button class="py-3 px-5 font-medium text-white bg-[#15803D] rounded-full w-full">Add to Cart</button>
+            <button onclick="loadCartBtn(${card.id})" class="cart-btn-${card.id} py-3 px-5 font-medium text-white bg-[#15803D] rounded-full w-full">Add to Cart</button>
     `
     cardsContainer.appendChild(div);
   })
@@ -103,10 +105,73 @@ const allTreeCards = () => {
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      console.log(data.plants);
       displayTreeCards(data.plants);
     })
 }
+
+const loadCartBtn = (id) => {
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      displayCart(data.plants);
+    })
+}
+
+const displayCart = (cartDetails) => {
+  const cartCardsContainer = document.getElementById('cart-cards-container');
+  cartCardsContainer.innerHTML += `
+    <div id="cartParent-${cartDetails.id}" class="bg-[#f0fdf4] py-2 px-3 rounded-lg">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h3 class="text-[14px] font-semibold">${cartDetails.name}</h3>
+                  <p class="text-[#8b9798]">৳<span>${cartDetails.price}</span></p>
+                </div>
+                <i id="${cartDetails.id}" onclick="loadPriceDeduct(${cartDetails.id})" class="delete-btn-${cartDetails.id} fa-solid fa-xmark"></i>
+              </div>
+            </div>
+  `
+
+  cartList.push({
+    id: `${cartDetails.id}`,
+    name: `${cartDetails.name}`,
+    price: `${cartDetails.price}`,
+  })
+
+  const totalAmount = document.getElementById('total-amount').innerText;
+  let totalAmountNumber = Number(totalAmount);
+  let productPrice = Number(`${cartDetails.price}`);
+
+  totalAmountNumber = totalAmountNumber + productPrice;
+  document.getElementById('total-amount').innerText = totalAmountNumber;
+}
+
+
+const loadPriceDeduct = (id) => {
+  const cartCardsContainer = document.getElementById('cart-cards-container');
+
+  const cartParent = document.getElementById(`cartParent-${id}`);
+
+  if (cartParent) {
+    cartCardsContainer.removeChild(cartParent);
+
+    const totalAmount = document.getElementById('total-amount').innerText;
+    let totalAmountNumber = Number(totalAmount);
+
+    let productPrice = 0;
+
+    cartList.forEach(item => {
+      if (Number(item.id) === id) {
+        productPrice = Number(item.price);
+      }
+    })
+
+    totalAmountNumber = totalAmountNumber - productPrice;
+    document.getElementById('total-amount').innerText = totalAmountNumber;
+  }
+  //  cartList = cartList.find(item => Number(item.id) !== id);
+}
+
 
 allTreeCards();
 
