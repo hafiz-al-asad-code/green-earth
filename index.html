@@ -88,17 +88,30 @@
 
     <!-- trees details container -->
     <section class="w-11/12 mx-auto mt-[50px] mb-[80px] md:mt-[100px] md:mb-[122px]">
-      <h1 class="text-[32px] font-semibold text-[#1F2937] text-center mb-[40px]">Choose Your Trees</h1>
+      <h1 class="text-[32px] font-semibold text-[#1F2937] text-center mb-[20px] md:mb-[40px]">Choose Your Trees</h1>
       <span id="spinner" class="loading loading-dots loading-xl flex mx-auto hidden"></span>
       <div class="md:grid md:grid-cols-12 gap-[30px]">
         <!-- categories section -->
         <div class="col-span-2">
-          <h3 class="text-xl font-semibold mb-6">Categories</h3>
+          <h3 class="text-xl font-semibold mb-6 hidden md:block">Categories</h3>
 
           <div id="category-container"
-            class="space-y-[16px] text-[#1F2937] shadow-sm md:shadow-none bg-white md:bg-[#f0fdf4]">
+            class="space-y-[16px] text-[#1F2937] shadow-sm md:shadow-none bg-white md:bg-[#f0fdf4] hidden md:block">
 
           </div>
+
+          <!-- category section dropdown for mobile -->
+          <div class="md:hidden flex justify-center">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="btn m-1 bg-[#15803d] text-white text-[16px] py-[20px] px-[50px]">
+                Categories <i class="fa-solid fa-caret-down"></i></div>
+              <ul id="category-container-dropdown" tabindex="0"
+                class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm ml-2">
+
+              </ul>
+            </div>
+          </div>
+
         </div>
 
         <!-- cards section -->

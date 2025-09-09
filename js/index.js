@@ -14,6 +14,7 @@ const loadCategories = () => {
 const displayCategories = (categories) => {
   // get the parent
   const categoryContainer = document.getElementById('category-container');
+  const categoryContainerDropDown = document.getElementById('category-container-dropdown');
 
   categories.forEach(category => {
     // create an element
@@ -23,6 +24,16 @@ const displayCategories = (categories) => {
 
     // append the element to the parent
     categoryContainer.appendChild(p);
+
+
+    // category container dropdown for mobile
+    // create an element
+    const li = document.createElement('li');
+    li.className = `common-p category-name-plate-${category.id} py-2 px-[10px] rounded-[4px] hover:bg-[#15803D] hover:text-white cursor-pointer`;
+    li.innerText = `${category.category_name}`;
+
+    // append the element to the parent
+    categoryContainerDropDown.appendChild(li);
 
     loadTreeCards(`${category.id}`);
   })
@@ -77,6 +88,28 @@ const loadTreeCards = (id) => {
     }
   })
   // })
+
+  // dropdown
+  const categoryContainerDropDown = document.getElementById('category-container-dropdown');
+  categoryContainerDropDown.addEventListener('click', function (event) {
+    if (event.target.classList.contains(`category-name-plate-${id}`)) {
+      manageSpinner(true);
+      const commonP = document.querySelectorAll('.common-p');
+      commonP.forEach(p => {
+        p.classList.remove('bg-[#15803D]', 'text-white');
+      })
+
+      event.target.classList.add("bg-[#15803D]", "text-white");
+
+      const url = `https://openapi.programming-hero.com/api/category/${id}`;
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          displayTreeCards(data.plants);
+        })
+    }
+  })
 }
 
 // function for display tree cards
@@ -90,8 +123,8 @@ const displayTreeCards = (cards) => {
 
     div.innerHTML = `
             <div>
-              <img class="rounded-lg h-[300px] w-full" src="${card.image}" alt="">
-              <span onclick="loadModal(${card.id})" class="card-name-${card.id} text-[14px] font-semibold mt-3 cursor-pointer">${card.name}</span>
+              <img class="rounded-lg h-[300px] w-full mb-3" src="${card.image}" alt="">
+              <span onclick="loadModal(${card.id})" class="card-name-${card.id} text-[14px] font-semibold cursor-pointer">${card.name}</span>
               <p class="text-[12px] text-[#1F2937] my-2">${card.description}</p>
               <div class="flex justify-between items-center mb-3">
                 <div class="py-1 px-3 bg-[#dcfce7] rounded-[400px]">
