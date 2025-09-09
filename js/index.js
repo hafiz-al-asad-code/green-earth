@@ -133,7 +133,7 @@ const displayModal = (plantsDetails) => {
 
   cardDetailsContainer.innerHTML = `
           <h1 class="text-2xl font-bold">${plantsDetails.name}</h1>
-          <img class="h-[300px] w-full" src="${plantsDetails.image}" alt="">
+          <img class="h-[300px] w-full rounded-lg" src="${plantsDetails.image}" alt="">
           <p><span class="font-bold">Category:</span> ${plantsDetails.category}</p>
           <p><span class="font-bold">Price:</span> ৳${plantsDetails.price}</p>
           <p><span class="font-bold">Description:</span> ${plantsDetails.description}</p>
