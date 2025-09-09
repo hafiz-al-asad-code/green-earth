@@ -40,33 +40,7 @@ const displayCategories = (categories) => {
 }
 
 // function for load tree cards
-// const loadTreeCards = (id) => {
-
-//   const url = `https://openapi.programming-hero.com/api/category/${id}`;
-//   fetch(url)
-//     .then(res => res.json())
-//     .then(data => {
-//       const categoryContainer = document.getElementById('category-container');
-//       categoryContainer.addEventListener('click', function (event) {
-//         if (event.target.classList.contains(`category-name-plate-${id}`)) {
-//           const commonP = document.querySelectorAll('.common-p');
-//           commonP.forEach(p => {
-//             p.classList.remove('bg-[#15803D]', 'text-white');
-//           })
-
-//           event.target.classList.add("bg-[#15803D]", "text-white");
-//           displayTreeCards(data.plants);
-//         }
-//       })
-//     })
-// }
-
 const loadTreeCards = (id) => {
-
-  // const url = `https://openapi.programming-hero.com/api/category/${id}`;
-  // fetch(url)
-  //   .then(res => res.json())
-  //   .then(data => {
   const categoryContainer = document.getElementById('category-container');
   categoryContainer.addEventListener('click', function (event) {
     if (event.target.classList.contains(`category-name-plate-${id}`)) {
@@ -87,9 +61,8 @@ const loadTreeCards = (id) => {
         })
     }
   })
-  // })
 
-  // dropdown
+  // category section dropdown for mobile devices
   const categoryContainerDropDown = document.getElementById('category-container-dropdown');
   categoryContainerDropDown.addEventListener('click', function (event) {
     if (event.target.classList.contains(`category-name-plate-${id}`)) {
@@ -179,6 +152,7 @@ const allTreeCards = () => {
     })
 }
 
+// function for load cart
 const loadCartBtn = (id) => {
   const url = `https://openapi.programming-hero.com/api/plant/${id}`;
   fetch(url)
@@ -188,6 +162,7 @@ const loadCartBtn = (id) => {
     })
 }
 
+// function for display cart
 const displayCart = (cartDetails) => {
   alert(`${cartDetails.name} has been added to the cart.`);
 
@@ -218,6 +193,7 @@ const displayCart = (cartDetails) => {
   document.getElementById('total-amount').innerText = totalAmountNumber;
 }
 
+// function for price deduct
 const loadPriceDeduct = (id) => {
   const cartCardsContainer = document.getElementById('cart-cards-container');
 
